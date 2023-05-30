@@ -1,5 +1,6 @@
 package com.enset.ebank_backend.web;
 
+import com.enset.ebank_backend.dtos.AccountOperationDTO;
 import com.enset.ebank_backend.dtos.BankAccountDTO;
 import com.enset.ebank_backend.entities.BankAccount;
 import com.enset.ebank_backend.exeption.BankAccountNotFoundException;
@@ -13,16 +14,22 @@ import java.util.List;
 @RestController
 public class BankAccountRestAPI {
     private BankAccountService bankAccountService;
-    public BankAccountRestAPI(BankAccountService bankAccountService){
-        this.bankAccountService=bankAccountService;
+
+    public BankAccountRestAPI(BankAccountService bankAccountService) {
+        this.bankAccountService = bankAccountService;
     }
-  @GetMapping("/accounts/{accountId}")
-   public BankAccountDTO getBankAccount(@PathVariable String accountId)throws BankAccountNotFoundException {
+
+    @GetMapping("/accounts/{accountId}")
+    public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
         return bankAccountService.getBankAccount(accountId);
-   }
-   @GetMapping("/accounts")
-   public List<BankAccountDTO> listAccounts(){
+    }
+    @GetMapping("/accounts")
+    public List<BankAccountDTO> listAccounts(){
         return bankAccountService.bankAccountList();
-   }
+    }
+    @GetMapping("/accounts/{accountId}/operations")
+    public List<AccountOperationDTO> getHistory(@PathVariable String accountId){
+        return bankAccountService.accountHistory(accountId);
+    }
 
 }

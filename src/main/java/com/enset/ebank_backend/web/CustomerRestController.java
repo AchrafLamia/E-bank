@@ -20,7 +20,7 @@ public class CustomerRestController {
     private BankAccountService bankAccountService;
    @GetMapping("/customers")
     public List<CustomerDTO> customers(){
-        return bankAccountService.listCostumers();
+        return bankAccountService.listCustomers();
     }
     @GetMapping("/customers/{id}")
     public  CustomerDTO getCustomer(@PathVariable(name = "id") Long customerID) throws CustomerNotFoundException {
@@ -39,7 +39,7 @@ public class CustomerRestController {
     @DeleteMapping ("/customers/{id}")
     public void deletCustomer(@PathVariable Long id){
 
-       bankAccountService.deletCustomer(id);
+       bankAccountService.deleteCustomer(id);
     }
 
 }
